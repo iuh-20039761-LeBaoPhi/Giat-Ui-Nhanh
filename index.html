@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -9,6 +9,7 @@
       type="image/x-icon"
       href="asset/image/Laundry logo vector _ Premium Vector.png"
     />
+    <link rel="stylesheet" href="asset/css/bootstrap.min.css" />
     <link rel="stylesheet" href="asset/css/styles.css" />
   </head>
   <body>
@@ -768,7 +769,12 @@
                 <span>Túi đựng miễn phí</span>
               </li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Chọn gói này</a>
+            <a
+              class="btn btn-primary choose-service"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+              >Chọn gói này</a
+            >
           </div>
 
           <div class="pricing-card">
@@ -834,7 +840,12 @@
                 <span>Tẩy vết bẩn nhẹ miễn phí</span>
               </li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Chọn gói này</a>
+            <a
+              class="btn btn-primary choose-service"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+              >Chọn gói này</a
+            >
           </div>
 
           <div class="pricing-card">
@@ -907,7 +918,98 @@
                 <span>Hỗ trợ 24/7</span>
               </li>
             </ul>
-            <a href="#contact" class="btn btn-primary">Chọn gói này</a>
+            <a
+              class="btn btn-primary choose-service"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+              >Chọn gói này</a
+            >
+          </div>
+        </div>
+        <!-- The Modal -->
+        <div class="modal" id="myModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Gửi Thông Tin Cho Chúng Tôi</h4>
+                <button type="button" class="btn" data-bs-dismiss="modal">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    fill="currentColor"
+                    class="bi bi-x"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <div class="contact-form">
+                  <form id="contactForm">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        required
+                        placeholder="👤 Họ và tên"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        required
+                        placeholder="📱 SĐT"
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        placeholder="🏠 Địa chỉ "
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <select id="service" name="service">
+                        <option value="">🧺 Chọn gói dịch vụ</option>
+                        <option value="Gói Cơ Bản">Gói Cơ Bản</option>
+                        <option value="Gói Tiêu Chuẩn">Gói Tiêu Chuẩn</option>
+                        <option value="Gói Cao Cấp">Gói Cao Cấp</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <textarea
+                        id="message"
+                        name="message"
+                        placeholder="📝 Nội dung cần tư vấn..."
+                      ></textarea>
+                    </div>
+
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      style="width: 100%; justify-content: center"
+                    >
+                      <span>Đặt dịch vụ</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1034,7 +1136,7 @@
 
           <div class="contact-form">
             <h3>Gửi Thông Tin Cho Chúng Tôi</h3>
-            <form id="contactForm">
+            <form id="contactForm" class="contactForm">
               <div class="form-group">
                 <label for="name">Họ và tên *</label>
                 <input
@@ -1058,12 +1160,12 @@
               </div>
 
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="address">Địa chỉ</label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email@example.com"
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="94 Trần Thị Trọng, Phường Tân Sơn, TP. Hồ Chí Minh"
                 />
               </div>
 
@@ -1071,10 +1173,25 @@
                 <label for="service">Dịch vụ quan tâm</label>
                 <select id="service" name="service">
                   <option value="">Chọn dịch vụ</option>
-                  <option value="basic">Gói Cơ Bản</option>
-                  <option value="standard">Gói Tiêu Chuẩn</option>
-                  <option value="premium">Gói Cao Cấp</option>
-                  <option value="other">Tư vấn khác</option>
+                  <option value="Dịch vụ giặt sấy nhanh">
+                    Dịch vụ giặt sấy nhanh
+                  </option>
+                  <option value="Dịch vụ giặt ủi lấy liền">
+                    Dịch vụ giặt ủi lấy liền
+                  </option>
+                  <option value="Dịch vụ giặt hấp giao tân nơi">
+                    Dịch vụ giặt hấp giao tân nơi
+                  </option>
+                  <option value="Dịch vụ giặt hấp áo vest, váy cưới">
+                    Dịch vụ giặt hấp áo vest, váy cưới
+                  </option>
+                  <option value="Dịch vụ giặt khăn khách sạn, nhà hàng, Spa">
+                    Dịch vụ giặt khăn khách sạn, nhà hàng, Spa
+                  </option>
+                  <option value="Dịch Vụ Vệ Sinh Giày Giặt Giày Cao Cấp">
+                    Dịch Vụ Vệ Sinh Giày Giặt Giày Cao Cấp
+                  </option>
+                  <option value="Tùy chọn khác">Tùy chọn khác</option>
                 </select>
               </div>
 
@@ -1219,7 +1336,35 @@
         />
       </svg>
     </button>
+    <!-- Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="successToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            Đặt dịch vụ thành công! Chúng tôi sẽ liên hệ sớm.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
 
+    <script
+      type="text/javascript"
+      src="asset/js/bootstrap.bundle.min.js"
+    ></script>
+    <script type="text/javascript" src="asset/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="asset/js/database.js"></script>
     <script type="text/javascript" src="asset/js/script.js"></script>
   </body>
 </html>

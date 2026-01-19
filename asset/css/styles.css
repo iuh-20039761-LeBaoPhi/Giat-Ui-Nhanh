@@ -44,6 +44,8 @@ body {
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  display: block;
+  padding: 0;
 }
 
 .navbar.scrolled {
@@ -91,6 +93,7 @@ body {
   list-style: none;
   gap: 40px;
   align-items: center;
+  margin: 0;
 }
 
 .nav-link {
@@ -212,7 +215,7 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   position: relative;
-  z-index: 10;
+  /* z-index: 1; */
 }
 
 .hero-content {
@@ -655,6 +658,22 @@ section {
   color: #1f2937;
   margin-bottom: 20px;
 }
+#pricing .modal-content {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+}
+#pricing .modal-body .contact-form {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+#pricing .modal-header h4 {
+  color: white;
+  width: 80%;
+}
+#pricing .modal-header button {
+  color: white;
+  width: 20%;
+}
 /* Testimonials */
 
 /* Contact */
@@ -708,6 +727,7 @@ section {
 .contact-item p {
   color: #dbeafe;
   font-size: 14px;
+  margin: 0;
 }
 
 .contact-form {
@@ -721,7 +741,10 @@ section {
   font-size: 1.5rem;
   font-weight: 900;
   margin-bottom: 30px;
-  color: #1f2937;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .form-group {
@@ -731,9 +754,12 @@ section {
 .form-group label {
   display: block;
   font-weight: 700;
-  color: #374151;
   margin-bottom: 8px;
   font-size: 14px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .form-group input,
@@ -826,6 +852,7 @@ footer {
 
 .footer-links {
   list-style: none;
+  padding: 0;
 }
 
 .footer-links li {
@@ -978,7 +1005,10 @@ footer {
     opacity: 0;
     transform: translateY(-10px);
 
-    transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
 
   .nav-menu.active {

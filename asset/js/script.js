@@ -45,17 +45,17 @@ scrollToTopBtn.addEventListener("click", function () {
 });
 
 // Contact Form
-const contactForm = document.getElementById("contactForm");
+// const contactForm = document.getElementById("contactForm");
 
-contactForm.addEventListener("submit", function (e) {
-  e.preventDefault();
+// contactForm.addEventListener("submit", function (e) {
+//   e.preventDefault();
 
-  alert(
-    "Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong thời gian sớm nhất."
-  );
+//   alert(
+//     "Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong thời gian sớm nhất.",
+//   );
 
-  contactForm.reset();
-});
+//   contactForm.reset();
+// });
 
 // Smooth Scroll for Links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -110,5 +110,15 @@ navLinks.forEach((link) => {
   link.addEventListener("click", () => {
     navLinks.forEach((item) => item.classList.remove("active"));
     link.classList.add("active");
+  });
+});
+//choose service button in pricing section
+$(".choose-service").on("click", function () {
+  let serviceName = $(this).closest(".pricing-card").find("h3").text().trim();
+
+  $("#service option").each(function () {
+    if ($(this).text().trim() === serviceName) {
+      $(this).prop("selected", true);
+    }
   });
 });
