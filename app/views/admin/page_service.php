@@ -148,7 +148,7 @@
                 <form id="addServiceForm">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Chi tiết dịch vụ</h4>
+                        <h4 class="modal-title">Thêm dịch vụ</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <!-- Modal body -->
@@ -179,7 +179,7 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
+                        <button type="submit" class="btn btn-success">Lưu</button>
                     </div>
                 </form>           
                 </div>

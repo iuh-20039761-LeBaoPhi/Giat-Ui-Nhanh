@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db = "rest_api_mvc";
+    private $db = "giat-ui-nhanh";
     private $user = "root";
     private $pass = "";
     public $conn;
