@@ -36,8 +36,6 @@ class UserController {
     public function login() {
     session_start(); // 🔴 BẮT BUỘC
 
-    header('Content-Type: application/json');
-
     $input = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($input['email'], $input['password'])) {

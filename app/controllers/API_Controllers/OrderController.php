@@ -18,7 +18,6 @@ class OrderController {
     }
 
     public function store() {
-        header('Content-Type: application/json');
 
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -50,7 +49,7 @@ class OrderController {
 
 
     public function update($id) {
-        header('Content-Type: application/json');
+ 
         $input = json_decode(file_get_contents("php://input"), true);
 
         if (!$input) {
@@ -59,11 +58,53 @@ class OrderController {
             return;      
         }
 
+        $currentOrder = $this->order->find($id);
+
+        if (!$currentOrder) {
+            http_response_code(404);
+            echo json_encode(["error" => "Đơn hàng không tồn tại"]);
+            return;
+        }
+
+        if (
+            $currentOrder['order_status'] === 'Completed' &&
+            $currentOrder['transaction_status'] === 'Paid'
+        ) {
+            http_response_code(403);
+            echo json_encode([
+                "error" => "Đơn hàng đã hoàn tất và thanh toán, không thể cập nhật trạng thái"
+            ]);
+            return;
+        }
+
+        if (
+            !isset($input['order_status']) ||
+            !isset($input['transaction_status'])
+        ) {
+            http_response_code(422);
+            echo json_encode(["error" => "Thiếu dữ liệu cập nhật"]);
+            return;
+        }
+
+        $newOrderStatus = $input['order_status'];
+        $newTransactionStatus = $input['transaction_status'];
+
+        if (
+            $newTransactionStatus === 'Paid' &&
+            $newOrderStatus !== 'Completed'
+        ) {
+            http_response_code(400);
+            echo json_encode([
+                "error" => "Chỉ được thanh toán khi đơn hàng đã hoàn tất (Completed)"
+            ]);
+            return;
+        }
+
         $data = [
-            'order_status'       => $input['order_status'],
-            'transaction_status' => $input['transaction_status'],
-            
+            'order_status'       => $newOrderStatus,
+            'transaction_status' => $newTransactionStatus,
         ];
+
         $result = $this->order->update($id, $data);
 
         if ($result) {
@@ -79,4 +120,26 @@ class OrderController {
         $this->order->delete($id);
         echo json_encode(["message" => "order deleted"]);
     }
+    public function search() {
+
+    $input = json_decode(file_get_contents("php://input"), true);
+
+    if (empty($input['customer_tel'])) {
+        http_response_code(400);
+        echo json_encode([
+            "error" => "Vui lòng nhập số điện thoại"
+        ]);
+        return;
+    }
+
+    $result = $this->order->searchOrder([
+        'customer_tel' => $input['customer_tel']
+    ]);
+
+    http_response_code(200);
+    echo json_encode([
+        "data" => $result
+    ]);
+}
+
 }

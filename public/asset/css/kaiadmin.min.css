@@ -565,7 +565,8 @@ body {
   display: flex;
   align-items: center;
   padding: 1rem;
-  box-shadow: 0 0 0 1px rgba(61, 70, 79, 0.05),
+  box-shadow:
+    0 0 0 1px rgba(61, 70, 79, 0.05),
     0 1px 3px 0 rgba(61, 70, 79, 0.15);
   font-size: 15px;
 }
@@ -1508,7 +1509,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-primary > .nav-item.active > a {
   background: #1572e8 !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(21, 114, 232, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-primary > .nav-item.active > a:before {
@@ -1529,7 +1531,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-secondary > .nav-item.active > a {
   background: #6861ce !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(104, 97, 206, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-secondary > .nav-item.active > a:before {
@@ -1550,7 +1553,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-info > .nav-item.active > a {
   background: #48abf7 !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(72, 171, 247, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-info > .nav-item.active > a:before {
@@ -1571,7 +1575,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-success > .nav-item.active > a {
   background: #31ce36 !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(49, 206, 54, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-success > .nav-item.active > a:before {
@@ -1592,7 +1597,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-warning > .nav-item.active > a {
   background: #ffad46 !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(255, 173, 70, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-warning > .nav-item.active > a:before {
@@ -1613,7 +1619,8 @@ body {
 }
 .sidebar.sidebar-style-2 .nav.nav-danger > .nav-item.active > a {
   background: #f25961 !important;
-  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    4px 4px 10px 0 rgba(0, 0, 0, 0.1),
     4px 4px 15px -5px rgba(242, 89, 97, 0.4);
 }
 .sidebar.sidebar-style-2 .nav.nav-danger > .nav-item.active > a:before {
@@ -8395,7 +8402,9 @@ label.error {
   border-radius: 3px;
   top: 4px;
   left: 4px;
-  box-shadow: 0 4px 0, 0 8px 0;
+  box-shadow:
+    0 4px 0,
+    0 8px 0;
 }
 .gg-menu-boxed {
   box-sizing: border-box;
@@ -8418,7 +8427,9 @@ label.error {
   border-radius: 3px;
   top: 2px;
   left: 2px;
-  box-shadow: 0 4px 0, 0 8px 0;
+  box-shadow:
+    0 4px 0,
+    0 8px 0;
 }
 .gg-more-vertical-alt {
   transform: scale(var(--ggs, 1));

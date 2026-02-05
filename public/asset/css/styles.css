@@ -97,6 +97,7 @@ body {
 }
 
 .nav-link {
+  cursor: pointer;
   color: white;
   text-decoration: none;
   font-weight: 600;
@@ -669,11 +670,13 @@ section {
 }
 #pricing .modal-header h4 {
   color: white;
-  width: 80%;
 }
-#pricing .modal-header button {
+#pricing .modal-header a {
   color: white;
-  width: 20%;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 700;
+  cursor: pointer;
 }
 /* Testimonials */
 
@@ -979,6 +982,15 @@ footer {
   height: 500px;
   object-fit: cover;
 }
+.table th,
+.table td {
+  white-space: nowrap;
+}
+#searchTable button.btn.btn-danger.btn-sm {
+  display: block;
+  padding: 5px;
+  border-radius: unset;
+}
 /* Responsive */
 @media (max-width: 768px) {
   .menu-toggle {
@@ -1013,7 +1025,7 @@ footer {
   }
 
   .nav-menu.active {
-    max-height: 400px;
+    max-height: 450px;
     opacity: 1;
     transform: translateY(0);
   }

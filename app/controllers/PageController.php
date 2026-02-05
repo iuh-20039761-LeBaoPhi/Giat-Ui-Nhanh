@@ -17,6 +17,13 @@
             }
             require_once "./app/views/admin/page_service.php";
         }
+        function statistic(){
+            if(!isset($_SESSION['user'])){
+                header("Location: ?ctrl=page&act=login");
+                exit();
+            }
+            require_once "./app/views/admin/page_statistic.php";
+        }
         function login(){
             require_once "./app/views/admin/page_login.php";
         }

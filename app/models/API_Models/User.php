@@ -40,7 +40,7 @@ class User {
     
     public function submitLogin($data) {
         $stmt = $this->db->prepare("SELECT * FROM $this->table WHERE user_email=? AND user_password=?");
-        $stmt->execute([$data['user_email'], $data['user_password']]);
+        $stmt->execute([$data['user_email'], sha1($data['user_password'])]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

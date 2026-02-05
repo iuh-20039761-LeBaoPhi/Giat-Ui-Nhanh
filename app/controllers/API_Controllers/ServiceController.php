@@ -18,7 +18,6 @@ class ServiceController {
     }
 
     public function store() {
-        header('Content-Type: application/json');
 
         $input = json_decode(file_get_contents("php://input"), true);
 
@@ -47,7 +46,7 @@ class ServiceController {
 
 
     public function update($id) {
-        header('Content-Type: application/json');
+   
         $input = json_decode(file_get_contents("php://input"), true);
 
         if (!$input) {

@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="icon"
+      href="public/asset/image/Laundry logo vector _ Premium Vector.png"
+      type="image/x-icon"
+    />
     <title>Đăng Nhập Admin</title>
-    <!-- Bootstrap 5.3.2 CSS -->
+
     <link rel="stylesheet" href="public/asset/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="public/asset/css/login.css">
 
-    <!-- Bootstrap Icons (tùy chọn, cho icon) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>

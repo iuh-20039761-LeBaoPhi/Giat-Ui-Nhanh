@@ -37,4 +37,11 @@ class Order {
         $stmt = $this->db->prepare("DELETE FROM $this->table WHERE id=?");
         return $stmt->execute([$id]);
     }
+
+    public function searchOrder($data) {
+        $stmt = $this->db->prepare("SELECT o.*, s.service_name FROM $this->table AS o 
+        JOIN services AS s ON o.service_id = s.id WHERE o.customer_tel = ?");
+       $stmt->execute([$data['customer_tel']]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

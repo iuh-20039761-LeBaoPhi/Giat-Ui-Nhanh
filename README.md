@@ -2,5 +2,4 @@
 
 Link github page Giat-Ui-Nhanh: https://iuh-20039761-lebaophi.github.io/Giat-Ui-Nhanh/
 
-Link thông tin đăng ký dịch vụ của khách hàng: https://docs.google.com/spreadsheets/d/1rlgkBrYUE34bX-Y6SohppR1LF-b8wt9c0FnbkXgnFRc/edit?usp=sharing
-
+Link hướng dẫn sử dụng web: https://iuh-20039761-lebaophi.github.io/Giat-Ui-Nhanh/doc/

@@ -35,29 +35,12 @@
                                 <p>Quản lý dịch vụ</p>
                             </a>
                         </li>
-                        <?php
-                        $isUserPage = (
-                            isset($_GET['ctrl']) && $_GET['ctrl'] == 'page' &&
-                            isset($_GET['act']) && in_array($_GET['act'], ['statisticOverTime'])
-                        );
-                        ?>
-                        <li class="nav-item <?php echo $isUserPage ? 'active submenu' : ''; ?>">
-                            <a data-bs-toggle="collapse" href="#charts">
+                        <li class="nav-item <?php echo (isset($_GET['ctrl']) && $_GET['ctrl'] == 'page' && isset($_GET['act']) && $_GET['act'] == 'statistic') ? 'active' : ''; ?>">
+                            <a  href="?ctrl=page&act=statistic" class="collapsed" aria-expanded="false">
                                 <i class="far fa-chart-bar"></i>
-                                <p>Thống kê</p>
-                                <span class="caret"></span>
+                                <p>Quản lý thống kê</p>
                             </a>
-                            <div class="collapse" id="charts">
-                                <ul class="nav nav-collapse">
-                                    <li class="<?php echo (isset($_GET['ctrl']) && $_GET['ctrl'] == 'page' && isset($_GET['act']) && $_GET['act'] == 'statisticOverTime') ? 'active' : ''; ?>">
-                                        <a href="?ctrl=page&act=statisticOverTime">
-                                            <span class="sub-item">Thống kê theo thời gian</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-                        
                     </ul>
                 </div>
             </div>

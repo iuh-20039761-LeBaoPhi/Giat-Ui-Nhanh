@@ -68,6 +68,7 @@
           <li><a href="#process" class="nav-link">Quy trình</a></li>
           <li><a href="#pricing" class="nav-link">Bảng giá</a></li>
           <li><a href="#contact" class="nav-link">Đặt dịch vụ</a></li>
+          <li><a class="nav-link" data-bs-toggle="modal" data-bs-target="#searchModal"><i class='fas fa-search'></i> Tra cứu đơn đặt</a></li>
         </ul>
         <button class="menu-toggle" id="menuToggle" aria-label="Menu">
           <svg
@@ -86,7 +87,51 @@
         </button>
       </div>
     </nav>
+    <!-- The Modal -->
+  <div class="modal" id="searchModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
 
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Tra cứu đơn hàng</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12 mb-3 mt-3">
+              <input type="text" id="searchOrder" class="form-control" placeholder="Nhập sau số (0) 988765432 để tra cứu đơn hàng">
+            </div>
+          </div>
+          <div class="row">
+             <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-hover ">
+                  <thead class="table-primary">
+                    <tr>
+                      <th>#</th>
+                      <th>Khách hàng</th>
+                      <th>SĐT</th>
+                      <th>Địa chỉ</th>
+                      <th>Dịch vụ</th>
+                      <th>Giá</th>
+                      <th>Trạng thái</th>
+                      <th>Ngày đặt</th>
+                      <th>Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="searchTable" style="text-align: center;">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     <!-- Hero Section -->
     <section class="hero" id="home">
       <div class="hero-overlay"></div>
@@ -477,7 +522,7 @@
             <p><?= htmlspecialchars($service['summary']) ?></p>
 
             <p>
-              <b>Giá tiền:</b> <?= number_format($service['service_price'],0,',','.') ?>/kg
+              <b>Giá tiền:</b> <?= number_format($service['service_price'],0,',','.') ?>
             </p>
 
             <a class="btn btn-primary choose-service" href="#contact">
@@ -874,10 +919,10 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <!-- Modal Header -->
-              <div class="modal-header">
+              <div class="modal-header" style="justify-content: space-between;">
                 <h4 class="modal-title">Gửi Thông Tin Cho Chúng Tôi</h4>
-                <button type="button" class="btn" data-bs-dismiss="modal">
-                  <svg
+                <a type="button"  data-bs-dismiss="modal">
+                  <!-- <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
                     height="30"
@@ -888,8 +933,9 @@
                     <path
                       d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
                     />
-                  </svg>
-                </button>
+                  </svg> -->
+                  &#215;
+                </a>
               </div>
               <!-- Modal body -->
               <div class="modal-body">
@@ -1093,7 +1139,6 @@
                   id="name"
                   name="name"
                   required
-                  placeholder="Nguyễn Văn A"
                 />
               </div>
 
@@ -1104,7 +1149,6 @@
                   id="phone"
                   name="phone"
                   required
-                  placeholder="0901234567"
                 />
               </div>
 
@@ -1114,7 +1158,6 @@
                   type="text"
                   id="address"
                   name="address"
-                  placeholder="94 Trần Thị Trọng, Phường Tân Sơn, TP. Hồ Chí Minh"
                 />
               </div>
 
@@ -1298,6 +1341,27 @@
         </div>
       </div>
     </div>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div
+        id="successCancelOrderToast"
+        class="toast align-items-center text-bg-success border-0"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            Hủy đơn hàng thành công!
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+      </div>
+    </div>
 
     <script
       type="text/javascript"
@@ -1306,5 +1370,25 @@
     <script type="text/javascript" src="public/asset/js/jquery-3.7.1.min.js"></script>
     <script type="text/javascript" src="public/asset/js/database.js"></script>
     <script type="text/javascript" src="public/asset/js/script.js"></script>
+    <script src="public/asset/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ["Public Sans:300,400,500,600,700"],
+        },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["public/asset/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
   </body>
 </html>

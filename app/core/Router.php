@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../controllers/API_Controllers/UserController.php";
 require_once __DIR__ . "/../controllers/API_Controllers/OrderController.php";
 require_once __DIR__ . "/../controllers/API_Controllers/ServiceController.php";
+require_once __DIR__ . "/../controllers/API_Controllers/StatisicController.php";
 
 class Router {
 
@@ -20,8 +21,6 @@ class Router {
         $id = $segments[1] ?? null;
 
         switch ($resource) {
-
-            // ===== USERS =====
             case 'users':
                 $controller = new UserController();
 
@@ -44,8 +43,6 @@ class Router {
                     self::methodNotAllowed();
                 }
                 break;
-
-            // ===== ORDERS =====
             case 'orders':
                 $controller = new OrderController();
 
@@ -68,8 +65,6 @@ class Router {
                     self::methodNotAllowed();
                 }
                 break;
-
-            // ===== SERVICES =====
             case 'services':
                 $controller = new ServiceController();
 
@@ -86,8 +81,6 @@ class Router {
                     self::methodNotAllowed();
                 }
                 break;
-
-            // ===== LOGIN =====
             case 'logins':
                 if ($method === 'POST') {
                     (new UserController())->login();
@@ -96,7 +89,24 @@ class Router {
                     self::methodNotAllowed();
                 }
                 break;
+            case 'statistics':
+                if ($method === 'POST') {
+                    (new StatisticController())->revenueTable();
+                }
+                else {
+                    self::methodNotAllowed();
+                }
+                break;
+            case 'search_orders':
+                $controller = new OrderController();
 
+                if ($method === 'POST') {
+                    $controller->search();
+                }
+                else {
+                    self::methodNotAllowed();
+                }
+                break;
             default:
                 self::notFound();
         }

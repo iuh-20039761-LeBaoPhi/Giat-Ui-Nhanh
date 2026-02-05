@@ -4,6 +4,8 @@ const createOrderAPI = "http://localhost/Giat-Ui-Nhanh/public/orders";
 const loginAPI = "http://localhost/Giat-Ui-Nhanh/public/logins";
 const updateOrderAPI = "http://localhost/Giat-Ui-Nhanh/public/orders";
 const serviceAPI = "http://localhost/Giat-Ui-Nhanh/public/services";
+const statisticAPI = "http://localhost/Giat-Ui-Nhanh/public/statistics";
+const searchOrderAPI = "http://localhost/Giat-Ui-Nhanh/public/search_orders";
 
 const toastEl = document.getElementById("successToast");
 
@@ -143,7 +145,7 @@ function updateOrdersAPI() {
       .then((res) =>
         res.json().then((result) => {
           if (!res.ok) {
-            throw new Error(result.message);
+            throw new Error(result.error);
           }
           return result;
         }),
@@ -162,7 +164,7 @@ function updateOrdersAPI() {
         }, TOAST_DELAY);
       })
       .catch((err) => {
-        showToast(err.message || "Có lỗi xảy ra!", "danger");
+        showToast(err.message, "danger");
 
         console.error(err);
       });
@@ -170,7 +172,7 @@ function updateOrdersAPI() {
 }
 updateOrdersAPI();
 
-function CancelOrdersAPI() {
+function cancelOrdersAPI() {
   const cancelBtns = document.querySelectorAll(".cancel-order-btn");
 
   if (!cancelBtns.length) return;
@@ -181,14 +183,12 @@ function CancelOrdersAPI() {
       const orderStatus = this.dataset.orderStatus;
       const transactionStatus = this.dataset.transactionStatus;
 
-      // Chặn hủy nếu đã thanh toán
-      if (transactionStatus === "Paid") {
-        showToast("Đơn hàng đã thanh toán, không thể hủy!", "warning");
+      if (!confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) {
         return;
       }
 
       const data = {
-        order_status: orderStatus, // Cancel
+        order_status: orderStatus,
         transaction_status: transactionStatus,
       };
 
@@ -199,10 +199,10 @@ function CancelOrdersAPI() {
         },
         body: JSON.stringify(data),
       })
-        .then(function (res) {
-          return res.json().then(function (result) {
+        .then((res) => {
+          return res.json().then((result) => {
             if (!res.ok) {
-              throw new Error(result.message);
+              throw new Error(result.error);
             }
             return result;
           });
@@ -214,14 +214,14 @@ function CancelOrdersAPI() {
             location.reload();
           }, 2500);
         })
-        .catch(function (err) {
-          showToast(err.message || "Có lỗi xảy ra!", "danger");
+        .catch((err) => {
+          showToast(err.message, "danger");
           console.error(err);
         });
     });
   });
 }
-CancelOrdersAPI();
+cancelOrdersAPI();
 
 function addServicesAPI() {
   const addServiceForm = document.getElementById("addServiceForm");
@@ -300,7 +300,7 @@ function updateServicesAPI() {
       .then((res) =>
         res.json().then((result) => {
           if (!res.ok) {
-            throw new Error(result.message);
+            throw new Error(result.error);
           }
           return result;
         }),
@@ -319,7 +319,7 @@ function updateServicesAPI() {
         }, TOAST_DELAY);
       })
       .catch((err) => {
-        showToast(err.message || "Có lỗi xảy ra!", "danger");
+        showToast(err.message, "danger");
 
         console.error(err);
       });
@@ -351,4 +351,235 @@ function showToast(message, type = "success") {
       },
     },
   );
+}
+
+function loadRevenueTable() {
+  const monthInput = document.getElementById("monthPicker");
+  if (!monthInput) return;
+
+  monthInput.addEventListener("change", function () {
+    const value = monthInput.value; // YYYY-MM
+
+    if (!value) {
+      alert("Vui lòng chọn tháng");
+      return;
+    }
+
+    const year = value.substring(0, 4);
+    const month = value.substring(5, 7);
+
+    console.log(year, month);
+    const data = {
+      year: year,
+      month: month,
+    };
+    fetch(statisticAPI, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const rows = res.data;
+
+        let html = "";
+        let i = 1;
+        let totalRevenue = 0;
+
+        if (!rows || rows.length === 0) {
+          html = `<tr><td colspan="4" class="text-center">Không có dữ liệu</td></tr>`;
+        } else {
+          rows.forEach((row) => {
+            totalRevenue += Number(row.revenue);
+            html += `
+        <tr>
+          <td>${i++}</td>
+          <td>${row.service_name}</td>
+          <td>${row.total_orders}</td>
+          <td>${Number(row.revenue).toLocaleString()}</td>
+        </tr>
+      `;
+          });
+
+          html += `
+      <tr class="fw-bold table-secondary">
+        <td colspan="3">Tổng doanh thu</td>
+        <td>${totalRevenue.toLocaleString()}</td>
+      </tr>
+    `;
+        }
+
+        document.getElementById("revenueTable").innerHTML = html;
+      });
+  });
+}
+loadRevenueTable();
+
+function searchOrder() {
+  const searchInput = document.getElementById("searchOrder");
+  if (!searchInput) return;
+
+  let timeout = null;
+
+  searchInput.addEventListener("input", function () {
+    const value = searchInput.value.trim();
+
+    clearTimeout(timeout);
+
+    if (!value) {
+      document.getElementById("searchTable").innerHTML = `
+        <tr>
+          <td colspan="9" class="text-center">Nhập số điện thoại để tìm kiếm</td>
+        </tr>`;
+      return;
+    }
+
+    timeout = setTimeout(() => {
+      fetch(searchOrderAPI, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ customer_tel: value }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          const rows = res.data;
+          let html = "";
+          let i = 1;
+
+          if (!rows || rows.length === 0) {
+            html = `
+              <tr>
+                <td colspan="9" class="text-center">Không có dữ liệu</td>
+              </tr>`;
+          } else {
+            rows.forEach((row) => {
+              let statusText = "";
+
+              switch (row.order_status) {
+                case "Pending":
+                  statusText = "Chờ xác nhận";
+                  break;
+                case "Processing":
+                  statusText = "Đã xác nhận";
+                  break;
+                case "Completed":
+                  statusText = "Đã hoàn thành";
+                  break;
+                case "Cancel":
+                  statusText = "Hủy";
+                  break;
+                default:
+                  statusText = row.order_status;
+              }
+
+              let statusClass = "";
+
+              switch (row.order_status) {
+                case "Pending":
+                  statusClass = "badge bg-primary";
+                  break;
+                case "Processing":
+                  statusClass = "badge bg-info";
+                  break;
+                case "Completed":
+                  statusClass = "badge bg-success";
+                  break;
+                case "Cancel":
+                  statusClass = "badge bg-danger";
+                  break;
+                default:
+                  statusClass = "badge bg-secondary";
+              }
+
+              let statusBtnClass = "";
+
+              if (row.order_status !== "Pending") {
+                statusBtnClass = "disabled";
+              }
+
+              html += `
+                <tr>
+                  <td>${i++}</td>
+                  <td>${row.customer_name}</td>
+                  <td>${row.customer_tel}</td>
+                  <td>${row.customer_address}</td>
+                  <td>${row.service_name}</td>
+                  <td>${Number(row.total_price).toLocaleString()}</td>
+                  <td><span style="font-size: 15px;" class = "${statusClass}">${statusText}</span></td>
+                  <td>${new Date(row.created_at).toLocaleDateString()}</td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm ${statusBtnClass} cancel-order" data-id="${row.id}" data-order-status="${row.order_status}" data-transaction-status="${row.transaction_status}">
+                      Hủy đơn
+                    </button>
+                  </td>
+                </tr>`;
+            });
+          }
+
+          document.getElementById("searchTable").innerHTML = html;
+          customerCancelOrdersAPI();
+        });
+    }, 500);
+  });
+}
+searchOrder();
+
+function customerCancelOrdersAPI() {
+  const cancelBtns = document.querySelectorAll(".cancel-order");
+  const toastEl = document.getElementById("successCancelOrderToast");
+  const modalEl = document.getElementById("searchModal");
+  const toast = new bootstrap.Toast(toastEl);
+
+  if (!cancelBtns.length) return;
+
+  cancelBtns.forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const orderId = this.dataset.id;
+      const transactionStatus = this.dataset.transactionStatus;
+
+      if (!confirm("Bạn có chắc chắn muốn hủy đơn hàng này không?")) {
+        return;
+      }
+
+      const modal = bootstrap.Modal.getInstance(modalEl);
+
+      const data = {
+        order_status: "Cancel",
+        transaction_status: transactionStatus,
+      };
+
+      fetch(`${updateOrderAPI}/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then(() => {
+          modal.hide();
+
+          document.getElementById("searchOrder").value = "";
+
+          document.getElementById("searchTable").innerHTML = `
+            <tr>
+              <td colspan="9" class="text-center">
+                Nhập số điện thoại để tìm kiếm
+              </td>
+            </tr>
+          `;
+
+          toast.show();
+        })
+        .catch((err) => {
+          console.error("Lỗi gửi dữ liệu:", err);
+        });
+    });
+  });
 }
