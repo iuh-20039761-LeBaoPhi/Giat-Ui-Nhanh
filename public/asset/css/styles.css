@@ -1058,7 +1058,7 @@ footer {
   }
 
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .section-header p {
@@ -1120,6 +1120,34 @@ footer {
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+  .contact-form {
+    padding: 0px;
+  }
+  #pricing .modal-header h4 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .contact-info h3 {
+    font-size: 1.2rem;
+  }
+  .contact-item h4 {
+    font-size: 1rem;
+  }
+  .contact-form h3 {
+    font-size: 1.2rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 16px;
+  }
+  .about-content .about-flex .text-content h3 {
+    font-size: 1.5rem;
+  }
+  .about-content .about-flex .text-content p {
+    font-size: 1rem;
   }
 }
 
