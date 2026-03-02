@@ -55,7 +55,6 @@
       <div class="nav-container">
         <a href="#home" class="logo">
           <img
-            style="width: 80px; height: 60px"
             src="public/asset/image/Frame 1.png"
             alt=""
           />
@@ -444,29 +443,11 @@
             <p>Nhận và giao tận nơi, miễn phí trong bán kính 5km</p>
           </div>
         </div>
-
-        <div
-          style="
-            margin-top: 60px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 30px;
-            padding: 60px 40px;
-            text-align: center;
-            color: white;
-          "
-        >
-          <h3 style="font-size: 2rem; font-weight: 900; margin-bottom: 20px">
+        <div class="commitment">
+          <h3>
             Cam kết của chúng tôi
           </h3>
-          <p
-            style="
-              font-size: 1.125rem;
-              line-height: 1.8;
-              max-width: 800px;
-              margin: 0 auto;
-              color: #dbeafe;
-            "
-          >
+          <p>
             Chúng tôi cam kết mang đến dịch vụ giặt ủi chất lượng cao nhất với
             giá cả hợp lý. Mọi sản phẩm đều được kiểm tra kỹ lưỡng trước khi
             giao đến tay khách hàng. Nếu không hài lòng, chúng tôi sẽ giặt lại
@@ -768,12 +749,7 @@
             </div>
 
             <div class="pricing-price">
-              <div class="price-amount" style="
-              background: linear-gradient(to right, #f97316, #dc2626);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-            ">
+              <div class="price-amount">
                 <?= number_format($basic['service_price']) ?>đ / kg
               </div>
               <input type="hidden" class="price-combo" data-price="<?= $basic['service_price'] ?>">
@@ -823,12 +799,7 @@
             </div>
 
             <div class="pricing-price">
-              <div class="price-amount" style="
-              background: linear-gradient(to right, #f97316, #dc2626);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-            ">
+              <div class="price-amount">
                 <?= number_format($standard['service_price']) ?>đ / kg
               </div>
               <input type="hidden" class="price-combo" data-price="<?= $standard['service_price'] ?>">
@@ -877,12 +848,7 @@
             </div>
 
             <div class="pricing-price">
-              <div class="price-amount" style="
-              background: linear-gradient(to right, #f97316, #dc2626);
-              -webkit-background-clip: text;
-              -webkit-text-fill-color: transparent;
-              background-clip: text;
-            ">
+              <div class="price-amount">
                 <?= number_format($premium['service_price']) ?>đ / kg
               </div>
               <input type="hidden" class="price-combo" data-price="<?= $premium['service_price'] ?>">

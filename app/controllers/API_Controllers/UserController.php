@@ -34,13 +34,13 @@ class UserController {
         echo json_encode(["message" => "User deleted"]);
     }
     public function login() {
-    session_start(); // 🔴 BẮT BUỘC
+    session_start(); 
 
     $input = json_decode(file_get_contents("php://input"), true);
 
     if (!isset($input['email'], $input['password'])) {
         http_response_code(400);
-        echo json_encode([
+        echo json_encode([  
             "error" => "Vui lòng nhập đầy đủ email và mật khẩu"
         ]);
         exit;
@@ -64,13 +64,7 @@ class UserController {
     $_SESSION['user'] = $result;
 
     http_response_code(200);
-    echo json_encode([
-        "message" => "Login thành công",
-        "user" => [
-            "id"   => $result['id'],
-            "name" => $result['user_name']
-        ]
-    ]);
+    echo json_encode([ "data" =>  $_SESSION['user']]);
     exit;
 }
 

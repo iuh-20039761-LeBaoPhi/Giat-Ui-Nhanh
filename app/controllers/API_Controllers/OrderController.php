@@ -122,24 +122,24 @@ class OrderController {
     }
     public function search() {
 
-    $input = json_decode(file_get_contents("php://input"), true);
+        $input = json_decode(file_get_contents("php://input"), true);
 
-    if (empty($input['customer_tel'])) {
-        http_response_code(400);
-        echo json_encode([
-            "error" => "Vui lòng nhập số điện thoại"
+        if (empty($input['customer_tel'])) {
+            http_response_code(400);
+            echo json_encode([
+                "error" => "Vui lòng nhập số điện thoại"
+            ]);
+            return;
+        }
+
+        $result = $this->order->searchOrder([
+            'customer_tel' => $input['customer_tel']
         ]);
-        return;
+
+        http_response_code(200);
+        echo json_encode([
+            "data" => $result
+        ]);
     }
-
-    $result = $this->order->searchOrder([
-        'customer_tel' => $input['customer_tel']
-    ]);
-
-    http_response_code(200);
-    echo json_encode([
-        "data" => $result
-    ]);
-}
 
 }
